@@ -3,7 +3,8 @@ import os
 # import json
 from products.models import ProductCategory, Product
 
-module_dir = os.path.dirname(__file__)
+
+# module_dir = os.path.dirname(__file__)
 
 
 # Create your views here.
