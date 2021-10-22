@@ -11,4 +11,16 @@ window.onload = function () {
             },
         })
     });
+
+    $('.product_list').on('click', 'a[type="add_item"]', function () {
+        var t_href = event.target;
+        console.log(t_href.href);
+
+        $.ajax({
+            url: t_href.href,
+            success: function (data) {
+                $('.product_list').html(data.result);
+            },
+        })
+        });
 }
