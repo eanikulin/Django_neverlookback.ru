@@ -58,6 +58,8 @@ def profile(request):
         'title': 'GeekShop - Профиль',
         'form': form,
         'baskets': Basket.objects.filter(user=user),
+        # 'total_quantity': sum(basket.quantity for basket in baskets),
+        # 'total_sum': sum(basket.sum() for basket in baskets),
     }
 
     return render(request, 'users/profile.html', context)
