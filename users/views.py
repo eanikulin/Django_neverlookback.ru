@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib import messages
@@ -43,6 +44,7 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+@login_required
 def profile(request):
     user = request.user
     if request.method == 'POST':
