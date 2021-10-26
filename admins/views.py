@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from users.models import User
+from products.models import Product
 from admins.forms import UserAdminRegistrationForm, UserAdminProfileForm
+from products.forms import ProductUpdateForm
 from django.contrib.auth.decorators import user_passes_test
 
 @user_passes_test(lambda u: u.is_staff)
@@ -35,6 +37,15 @@ def admin_users(request):
     }
     return render(request, 'admins/admin-users-read.html', context)
 
+# Read
+@user_passes_test(lambda u: u.is_staff)
+def read_products(request):
+    context = {
+        'title': 'Geekshop - продукты',
+        'products': Product.objects.all(),
+    }
+    return render(request, 'admins/admin-products-read.html', context)
+
 
 # Update
 @user_passes_test(lambda u: u.is_staff)
@@ -55,6 +66,26 @@ def admin_users_update(request, id):
         'selected_user': selected_user,
     }
     return render(request, 'admins/admin-users-update-delete.html', context)
+
+# Update
+@user_passes_test(lambda u: u.is_staff)
+def products_update(request, id):
+    selected_product = Product.objects.get(id=id)
+    if request.method == 'POST':
+        form = ProductUpdateForm(instance=selected_product, files=request.FILES, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('admins:read_products'))
+    else:
+        form = ProductUpdateForm(instance=selected_product)
+
+
+    context = {
+        'title': 'Geekshop - редактирование продукта',
+        'form': form,
+        'selected_product': selected_product,
+    }
+    return render(request, 'admins/admin-products-update-delete.html', context)
 
 
 # Delete
