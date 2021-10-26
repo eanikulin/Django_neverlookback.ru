@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib import messages
@@ -43,6 +44,7 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+@login_required
 def profile(request):
     user = request.user
     if request.method == 'POST':
@@ -56,6 +58,8 @@ def profile(request):
         'title': 'GeekShop - Профиль',
         'form': form,
         'baskets': Basket.objects.filter(user=user),
+        # 'total_quantity': sum(basket.quantity for basket in baskets),
+        # 'total_sum': sum(basket.sum() for basket in baskets),
     }
 
     return render(request, 'users/profile.html', context)
