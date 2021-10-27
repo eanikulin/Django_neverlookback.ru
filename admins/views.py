@@ -27,6 +27,22 @@ def admin_users_create(request):
     context = {'title': 'Geekshop - создание пользователя', 'form': form}
     return render(request, 'admins/admin-users-create.html', context)
 
+# Create
+@user_passes_test(lambda u: u.is_staff)
+def products_create(request):
+    if request.method == 'POST':
+        form = ProductUpdateForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            # messages.success(request, 'Вы успешно зарегестрировались!')
+            return HttpResponseRedirect(reverse('admins:read_products'))
+        else:
+            print(form.errors)
+    else:
+        form = ProductUpdateForm()
+    context = {'title': 'Geekshop - создание продукта', 'form': form}
+    return render(request, 'admins/admin-products-create.html', context)
+
 
 # Read
 @user_passes_test(lambda u: u.is_staff)
@@ -39,7 +55,7 @@ def admin_users(request):
 
 # Read
 @user_passes_test(lambda u: u.is_staff)
-def read_products(request):
+def products_read(request):
     context = {
         'title': 'Geekshop - продукты',
         'products': Product.objects.all(),
@@ -96,3 +112,10 @@ def admin_users_delete(request, id):
     # user.save()
     user.safe_delete()
     return HttpResponseRedirect(reverse('admins:admin_users'))
+
+# Delete
+@user_passes_test(lambda u: u.is_staff)
+def product_delete(request, id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    return HttpResponseRedirect(reverse('admins:read_products'))
