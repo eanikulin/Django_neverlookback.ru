@@ -5,6 +5,8 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 from users.models import User
+
+
 # import datetime
 
 
@@ -49,7 +51,20 @@ class UserRegistrationForm(UserCreationForm):
 
         return data
 
-    def save(self):
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if User.objects.filter(email=data).exists():
+            raise forms.ValidationError(f'Пользователь с почтой {data} уже существует.')
+
+        return data
+
+    # if User.objects.filter(email=form.email).exists():
+    #     print('Пользователь с данным email уже используется')
+    #     messages.success(request, f'Пользователь с {form.email} уже существует.')
+
+    #     return HttpResponseRedirect(reverse('users:login'))
+
+    def save(self, **kwargs):
         user = super(UserRegistrationForm, self).save()
 
         user.is_active = False

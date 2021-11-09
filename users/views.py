@@ -5,15 +5,17 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib import messages
-from baskets.models import Basket
-from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from admins.views import UserCreateView
-from django.urls import reverse_lazy
-from django.contrib.auth.decorators import user_passes_test
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt,csrf_protect
-
+from django.views.decorators.csrf import csrf_exempt
 from users.models import User
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+
+
+# from baskets.models import Basket
+# from admins.views import UserCreateView
+# from django.urls import reverse_lazy
+# from django.contrib.auth.decorators import user_passes_test
+# from django.utils.decorators import method_decorator
+
 
 @csrf_exempt
 def login(request):
@@ -26,6 +28,7 @@ def login(request):
             if user and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('index'))
+
         else:
             print(form.errors)
     else:
@@ -60,21 +63,7 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 
-# Create Class
-# class UserRegistrationView(UserCreateView):
-#     success_url = reverse_lazy('users:login')
-#     template_name = 'users/registration.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(UserCreateView, self).get_context_data(**kwargs)
-#         context['title'] = 'GeekShop - Регистрация'
-#         return context
-#
-#     @method_decorator(user_passes_test(lambda u: not u.is_staff))
-#     def dispatch(self, request, *args, **kwargs):
-#         return super(UserCreateView, self).dispatch(request, *args, **kwargs)
-
-@csrf_exempt #This skips csrf validation. Use csrf_protect to have validation
+@csrf_exempt  # This skips csrf validation. Use csrf_protect to have validation
 def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
@@ -87,13 +76,13 @@ def registration(request):
             else:
                 print('Сообщение пользователю НЕ отправлено.')
                 return HttpResponseRedirect(reverse('users:login'))
-
         else:
             print(form.errors)
     else:
         form = UserRegistrationForm()
     context = {'title': 'GeekShop - Регистрация', 'form': form}
     return render(request, 'users/registration.html', context)
+
 
 def verify(request, email, activation_key):
     try:
@@ -122,4 +111,16 @@ def send_verify_mail(user):
 
     return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
-
+# Create Class
+# class UserRegistrationView(UserCreateView):
+#     success_url = reverse_lazy('users:login')
+#     template_name = 'users/registration.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(UserCreateView, self).get_context_data(**kwargs)
+#         context['title'] = 'GeekShop - Регистрация'
+#         return context
+#
+#     @method_decorator(user_passes_test(lambda u: not u.is_staff))
+#     def dispatch(self, request, *args, **kwargs):
+#         return super(UserCreateView, self).dispatch(request, *args, **kwargs)
