@@ -90,11 +90,21 @@ class UserProfileForm(UserChangeForm):
 
 
 class UserProfileEditForm(forms.ModelForm):
+    tagline = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+    about_me = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+    gender = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+
     class Meta:
         model = UserProfile
         fields = ('tagline', 'about_me', 'gender')
 
-    def __init__(self, *args, **kwargs):
-        super(UserProfileEditForm, self).__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control py-4'
+
+# class UserProfileEditForm(forms.ModelForm):
+#     class Meta:
+#         model = UserProfile
+#         fields = ('tagline', 'about_me', 'gender')
+#
+#     def __init__(self, *args, **kwargs):
+#         super(UserProfileEditForm, self).__init__(*args, **kwargs)
+#         for field_name, field in self.fields.items():
+#             field.widget.attrs['class'] = 'form-control py-4'
