@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Создан</th>
+            <th scope="col">Обновлен</th>
+            <th scope="col">Статус</th>
+        </tr>
+        </thead>
+        <tbody class="">
+        {% include 'ordersapp/includes/inc_order_list.html' %}
+        </tbody>
+
+    </table>
+    <button class="btn btn-info btn-block" >
+        <a href="{% url 'index' %}">
+            на главную
+        </a>
+    </button>
+    <button class="btn btn-info btn-block">
+        <a href="{% url 'ordersapp:order_create' %}">
+            новый
+        </a>
+    </button>
+</div>
+
+{% endblock %}
