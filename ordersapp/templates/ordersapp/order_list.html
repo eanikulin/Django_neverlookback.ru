@@ -2,10 +2,14 @@
 {% load static %}
 
 {% block css %}
+<link href="{% static 'css/menu.css' %}" rel="stylesheet">
 <link href="{% static 'css/profile.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
+    <div class="hero-white">
+        {% include 'products/includes/inc_main_menu.html' %}
+    </div>
 <div class="container">
     <table class="table">
         <thead>
