@@ -3,8 +3,13 @@
 {% block css %}
 <link href="{% static 'css/profile.css' %}" rel="stylesheet">
 {% endblock %}
+{% block js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'ordersapp/js/script.js' %}"></script>
+    <script src="{% static 'ordersapp/js/jquery.formset.js' %}"></script>
+{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container order_form">
 
     {% include 'ordersapp/includes/inc_order_summary.html' %}
 </div>
@@ -35,7 +40,16 @@
                     {% endfor %}
                     {% endif %}
                     {{ field.errors.as_ul }}
+                    {% if field.name != 'price' %}
                     {{ field }}
+                    {% else %}
+                    {% if field.value %}
+                    <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">
+                                                 {{ field.value }}
+                                               </span> руб
+                    {% endif %}
+                    {% endif %}
+
                 </td>
                 {% endfor %}
             </tr>
