@@ -4,13 +4,14 @@
 {% block css %}
 <link href="{% static 'css/menu.css' %}" rel="stylesheet">
 <link href="{% static 'css/profile.css' %}" rel="stylesheet">
+<script src="{% static 'ordersapp/js/scripts.js' %}"></script>
 {% endblock %}
 
 {% block content %}
     <div class="hero-white">
         {% include 'products/includes/inc_main_menu.html' %}
     </div>
-<div class="container">
+<div class="container row px-5">
     <table class="table">
         <thead>
         <tr>
