@@ -133,3 +133,4 @@ dmypy.json
 .pyre/
 
 geekshop-server/geekshop/.idea/
+geekshop/.env
