@@ -36,6 +36,11 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'baskets:index' %}">Корзина
+                        <i class=""></i>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'ordersapp:main' %}">Заказы
                         <i class=""></i>
                     </a>
