@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -98,12 +98,6 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -112,7 +106,7 @@ DATABASES = {
         'NAME': 'geekshop',
         'USER': 'geekshop',
         'PASSWORD': env('PASSWORD_DB'),
-        'HOST': 'minimonetaz1.ddns.net',
+        'HOST': env('HOST_DB'),
         'PORT': '5432'
     }
 }
@@ -154,10 +148,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-        BASE_DIR / 'static',
-)
+# STATICFILES_DIRS = (
+#         BASE_DIR / 'static',
+# )
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -180,7 +175,8 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
 )
 
-DOMAIN_NAME = 'http://localhost:8000'
+# DOMAIN_NAME = 'http://localhost:8000'
+DOMAIN_NAME = 'http://minimonetaz1.ddns.net'
 
 # EMAIL_HOST = 'localhost'
 # EMAIL_PORT = '25'
@@ -189,8 +185,8 @@ DOMAIN_NAME = 'http://localhost:8000'
 EMAIL_USE_SSL = False
 
 EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '3f41c4f06626d8'
-EMAIL_HOST_PASSWORD = '632cbf7067094d'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER'),
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD'),
 EMAIL_PORT = '2525'
 
 #1 Вариант с локальным почтовым сервером
