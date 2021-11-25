@@ -89,22 +89,22 @@ class UserProfileForm(UserChangeForm):
         fields = ('username', 'email', 'first_name', 'last_name', 'image', 'middle_name', 'age')
 
 
-class UserProfileEditForm(forms.ModelForm):
-    tagline = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
-    about_me = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
-    gender = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+# class UserProfileEditForm(forms.ModelForm):
+#     tagline = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+#     about_me = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+#     gender = forms.CharField(widget=forms.Select(attrs={'class': 'form-control'}))
+#
+#     class Meta:
+#         model = UserProfile
+#         fields = ('tagline', 'about_me', 'gender')
 
+
+class UserProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('tagline', 'about_me', 'gender')
 
-
-# class UserProfileEditForm(forms.ModelForm):
-#     class Meta:
-#         model = UserProfile
-#         fields = ('tagline', 'about_me', 'gender')
-#
-#     def __init__(self, *args, **kwargs):
-#         super(UserProfileEditForm, self).__init__(*args, **kwargs)
-#         for field_name, field in self.fields.items():
-#             field.widget.attrs['class'] = 'form-control py-4'
+    def __init__(self, *args, **kwargs):
+        super(UserProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
