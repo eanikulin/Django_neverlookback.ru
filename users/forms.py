@@ -82,7 +82,7 @@ class UserProfileForm(UserChangeForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'readonly': True}))
     email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control py-4', 'readonly': True}))
     middle_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
-    age = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control py-4', 'readonly': True}))
+    age = forms.CharField(widget=forms.NumberInput(attrs={'class': 'form-control py-4'}))
 
     class Meta:
         model = User
