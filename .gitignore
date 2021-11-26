@@ -134,3 +134,5 @@ dmypy.json
 
 geekshop-server/geekshop/.idea/
 geekshop/.env
+
+Test report/
