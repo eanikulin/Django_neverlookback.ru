@@ -94,6 +94,12 @@
 <script src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
 
 <script src="{% static 'js/basket.js' %}"></script>
+<script src="{% static 'js/snow/snowfall.jquery.min.js' %}"></script>
+
+
+<script type="text/javascript">
+   $(document).snowfall({flakeCount : 200, maxSpeed : 10});
+</script>
 {% block js %}
 {% endblock %}
 </body>
