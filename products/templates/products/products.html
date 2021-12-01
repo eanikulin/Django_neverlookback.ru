@@ -71,11 +71,8 @@
                                 <h5>{{ item.price }} руб</h5>
                                 <p class="card-text">{{ item.description }}</p>
                             </div>
-                            <div class="card-footer text-center">
-                                <a class="btn btn-outline-success" href="{% url 'baskets:basket_add' item.id %}"
-                                   type="add_item">
+                            <div class="btn btn-success text-center" type="add_item" data-add_item="{% url 'baskets:basket_add' item.id %}">
                                     Отправить в корзину
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -118,7 +115,7 @@
 {% block footer %}
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; GeekShop 2020</p>
+        <p class="m-0 text-center text-white">Copyright &copy; GeekShop 2021</p>
     </div>
 </footer>
 {% endblock %}
