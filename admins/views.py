@@ -14,7 +14,7 @@ from django.urls import reverse_lazy
 
 @user_passes_test(lambda u: u.is_staff)
 def index(request):
-    context = {'title': 'Geekshop - Админ панель'}
+    context = {'title': 'N.L.B. - Админ панель'}
     return render(request, 'admins/index.html', context)
 
 

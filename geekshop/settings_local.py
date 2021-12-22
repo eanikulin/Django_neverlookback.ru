@@ -27,7 +27,8 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+# DEBUG = env('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,6 +65,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'geekshop.urls'
@@ -98,6 +101,7 @@ DATABASES = {
     }
 }
 
+
 # DATABASES = {
 #     'default': {
 #         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -109,7 +113,6 @@ DATABASES = {
 #         'PORT': '5432'
 #     }
 # }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -148,7 +151,7 @@ USE_TZ = True
 # STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    BASE_DIR / 'static',
+        BASE_DIR / 'static',
 )
 
 MEDIA_URL = '/media/'
@@ -172,8 +175,8 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
 )
 
-# DOMAIN_NAME = 'http://localhost:8000'
-DOMAIN_NAME = 'http://minimonetaz1.ddns.net'
+DOMAIN_NAME = 'http://localhost:8000'
+# DOMAIN_NAME = 'http://194.58.107.225'
 
 # EMAIL_HOST = 'localhost'
 # EMAIL_PORT = '25'
@@ -241,3 +244,17 @@ if DEBUG:
         'debug_toolbar.panels.profiling.ProfilingPanel',
         'template_profiler_panel.panels.template.TemplateProfilerPanel',
     ]
+
+if os.name == 'posix':
+    CACHE_MIDDLEWARE_ALIAS = 'default'
+    CACHE_MIDDLEWARE_SECONDS = 10
+    CACHE_MIDDLEWARE_KEY_PREFIX = 'geekshop'
+
+    CACHE = {
+        'default': {
+            'BACKEND': 'django.core.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        }
+    }
+
+LOW_CACHE = True

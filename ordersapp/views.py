@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect, JsonResponse
@@ -60,7 +61,7 @@ class OrderItemCreate(CreateView):
                 orderitems.instance = self.object
                 orderitems.save()
 
-        if self.object.get_total_cost() == 0:
+        if self.object.get_summary().get('total_cost') == 0:
             self.object.delete()
 
         return super(self.__class__, self).form_valid(form)
@@ -97,7 +98,7 @@ class OrderItemUpdate(UpdateView):
                 orderitems.instance = self.object
                 orderitems.save()
 
-        if self.object.get_total_cost() == 0:
+        if self.object.get_summary().get('total_cost') == 0:
             self.object.delete()
 
         return super(self.__class__, self).form_valid(form)
@@ -116,7 +117,7 @@ class OrderRead(DetailView):
         context['title'] = 'заказ/просмотр'
         return context
 
-
+@login_required
 def order_forming_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
     order.status = Order.SENT_TO_PROCEED
