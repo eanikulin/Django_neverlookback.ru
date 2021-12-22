@@ -176,7 +176,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # DOMAIN_NAME = 'http://localhost:8000'
-DOMAIN_NAME = 'http://194.58.107.225'
+DOMAIN_NAME = 'https://neverlookback.ru/'
 
 # EMAIL_HOST = 'localhost'
 # EMAIL_PORT = '25'

@@ -92,12 +92,12 @@ def get_products():
 
 
 def index(request):
-    context = {'title': 'N.L.B'}
+    context = {'title': 'N.L.B.'}
     return render(request, 'products/index.html', context)
 
 
 def products(request, category_id=None, page=1):
-    context = {'title': 'N.L.B - Каталог', 'categories': get_all_obj()}
+    context = {'title': 'N.L.B. - Каталог', 'categories': get_all_obj()}
     if category_id:
         products = get_category(category_id)
     else:
