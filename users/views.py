@@ -34,7 +34,7 @@ def login(request):
             print(form.errors)
     else:
         form = UserLoginForm()
-    context = {'title': 'GeekShop - Авторизация', 'form': form}
+    context = {'title': 'N.L.B. - Авторизация', 'form': form}
     return render(request, 'users/login.html', context)
 
 
@@ -57,7 +57,7 @@ def profile(request):
         form_user = UserProfileForm(instance=user)
         form_user_profile = UserProfileEditForm(instance=user.userprofile)
     context = {
-        'title': 'GeekShop - Профиль',
+        'title': 'N.L.B. - Профиль',
         'form': form_user,
         'form_user_profile': form_user_profile,
         # 'baskets': Basket.objects.filter(user=user),
@@ -85,7 +85,7 @@ def registration(request):
             print(form.errors)
     else:
         form = UserRegistrationForm()
-    context = {'title': 'GeekShop - Регистрация', 'form': form}
+    context = {'title': 'N.L.B. - Регистрация', 'form': form}
     return render(request, 'users/registration.html', context)
 
 
@@ -124,7 +124,7 @@ def send_verify_mail(user):
 #
 #     def get_context_data(self, **kwargs):
 #         context = super(UserCreateView, self).get_context_data(**kwargs)
-#         context['title'] = 'GeekShop - Регистрация'
+#         context['title'] = 'N.L.B. - Регистрация'
 #         return context
 #
 #     @method_decorator(user_passes_test(lambda u: not u.is_staff))
