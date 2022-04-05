@@ -1,1 +1,2 @@
-Lerning_Django_geekshop
+# Магазин сувениров
+Разработан на python с использованием Django, JavaScript.
