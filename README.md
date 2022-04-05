@@ -1,2 +1,3 @@
-# Магазин сувениров
-Разработан на python с использованием Django, JavaScript.
+# Проект сайта магазина сувениров  
+**Технологии Django, JavaScript...**  
+URL: https://neverlookback.ru/
